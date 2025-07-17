@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  product_db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: product_order_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - '5433:5432'
+    volumes:
+      - product_data:/var/lib/postgresql/data
+  customer_db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: customer_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - '5434:5432'
+    volumes:
+      - customer_data:/var/lib/postgresql/data
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - '5672:5672'
+      - '15672:15672' # Management UI
+volumes:
+  product_data:
+  customer_data:
